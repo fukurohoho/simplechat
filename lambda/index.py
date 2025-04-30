@@ -16,7 +16,21 @@ def lambda_handler(event, context):
 
         with urllib.request.urlopen(req) as response:
             res_body = response.read()
-            return json.loads(res_body)
+            res_json = json.loads(res_body)
+            return {
+                "statusCode": 200,
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+                    "Access-Control-Allow-Methods": "OPTIONS,POST"
+                },
+                "body": json.dumps({
+                    "success": True,
+                    "response": res_json["generated_text"],
+                    "conversationHistory": res_json["conversation_history"]
+                })
+            }
         
     except Exception as error:
         print("Error:", str(error))

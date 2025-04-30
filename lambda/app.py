@@ -220,4 +220,3 @@ if __name__ == "__main__":
     run_with_ngrok(port=8501)  # このポート番号を確認
     # run_with_ngrokが終了したときにメッセージを表示
     print("\nサーバープロセスが終了しました。")
-    handler = Mangum(app) 
