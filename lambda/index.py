@@ -2,16 +2,12 @@
 import json
 import os
 import boto3
-import re  # 正規表現モジュールをインポート
-from botocore.exceptions import ClientError
-import torch
-from transformers import pipeline
-import time
+import re
 import traceback
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List, Dict, Any
+from typing import List, Dict
 import uvicorn
 import nest_asyncio
 from pyngrok import ngrok
@@ -60,7 +56,7 @@ async def root():
     return {"status": "ok", "message": "BedRoxk is runnning"}
 
 # 簡略化されたエンドポイント
-@app.post("/", response_model=GenerationResponse)
+@app.post("/chat", response_model=GenerationResponse)
 async def generate(request: GenerationRequest):
     """単純なプロンプト入力に基づいてテキストを生成"""
     try:
