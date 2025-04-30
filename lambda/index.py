@@ -67,12 +67,6 @@ async def generate(request: GenerationRequest):
             bedrock_client = boto3.client('bedrock-runtime', region_name=region)
             print(f"Initialized Bedrock client in region: {region}")
         
-        # Cognitoで認証されたユーザー情報を取得
-        # user_info = None
-        # if 'requestContext' in event and 'authorizer' in event['requestContext']:
-        #     user_info = event['requestContext']['authorizer']['claims']
-        #     print(f"Authenticated user: {user_info.get('email') or user_info.get('cognito:username')}")
-        
         # リクエストボディの解析
         message = request.prompt
         conversation_history = conversation_history
@@ -145,7 +139,7 @@ async def generate(request: GenerationRequest):
         )
 
     except Exception as error:
-        raise HTTPException(status_code=500, detail=f"応答の生成中にエラーが発生しました: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"応答の生成中にエラーが発生しました: {str(error)}")
 
 def run_with_ngrok(port=8501):
     """ngrokでFastAPIアプリを実行"""
