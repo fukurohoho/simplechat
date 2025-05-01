@@ -4,7 +4,7 @@ import urllib.request
 
 def lambda_handler(event, context):
     try:
-        url = "https://a475-14-10-136-97.ngrok-free.app" # ハードコーディングよくない？
+        url = "https://970c-133-3-201-38.ngrok-free.app" # ハードコーディングよくない？
         request_body = json.loads(event['body'])
         request_body['invoked_function_arn'] = context.invoked_function_arn
         
